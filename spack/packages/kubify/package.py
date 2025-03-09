@@ -22,3 +22,5 @@ class Kubify(CMakePackage):
             self.define('BUILD_SHARED_LIBS', 'ON'),
         ]
         return args
+
+    license = 'MIT'

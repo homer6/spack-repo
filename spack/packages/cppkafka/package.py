@@ -36,3 +36,5 @@ class Cppkafka(CMakePackage):
             self.define_from_variant('CPPKAFKA_RDKAFKA_STATIC_LIB', 'rdkafka_static'),
         ]
         return args
+
+    license = 'BSD-2-Clause'
