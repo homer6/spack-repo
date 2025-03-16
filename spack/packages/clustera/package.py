@@ -1,5 +1,5 @@
 from spack import *
-
+import logging
 
 class Clustera(CMakePackage):
     """Clustera streaming substrate."""
@@ -53,11 +53,10 @@ class Clustera(CMakePackage):
         """Verify that test binary was installed correctly."""
         if self.spec.satisfies('+tests'):
             import os
-            import spack.tty
             test_bin = os.path.join(self.prefix.bin, 'clustera_tests')
             if not os.path.isfile(test_bin):
-                spack.tty.warn(f"Test binary not found: {test_bin}")
+                logging.warning(f"Test binary not found: {test_bin}")
             else:
-                spack.tty.msg(f"Test binary installed successfully: {test_bin}")
+                logging.info(f"Test binary installed successfully: {test_bin}")
 
     license = 'MIT'
