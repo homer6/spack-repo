@@ -1,4 +1,4 @@
-from spack.package import *
+from spack import *
 
 
 class Clustera(CMakePackage):
@@ -14,10 +14,14 @@ class Clustera(CMakePackage):
 
     depends_on('cmake', type='build')
     depends_on('cppkafka')
+    depends_on('googletest', type=('build', 'test'))
+
+    variant('tests', default=True, description='Build test executables')
 
     def cmake_args(self):
         args = [
             self.define('CMAKE_BUILD_TYPE', 'Release'),
+            self.define_from_variant('BUILD_TESTING', 'tests')
         ]
 
         import os
@@ -44,5 +48,16 @@ class Clustera(CMakePackage):
         
         return args
 
+    @run_after('install')
+    def check_install(self):
+        """Verify that test binary was installed correctly."""
+        if self.spec.satisfies('+tests'):
+            import os
+            from spack.util import tty
+            test_bin = os.path.join(self.prefix.bin, 'clustera_tests')
+            if not os.path.isfile(test_bin):
+                tty.warn(f"Test binary not found: {test_bin}")
+            else:
+                tty.msg(f"Test binary installed successfully: {test_bin}")
 
     license = 'MIT'
