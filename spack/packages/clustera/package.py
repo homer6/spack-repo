@@ -8,7 +8,8 @@ class Clustera(CMakePackage):
     url      = "https://github.com/homer6/clustera/archive/refs/tags/v0.1.0.tar.gz"
     git      = "https://github.com/homer6/clustera.git"
 
-    version('main', branch='master')
+    #version('main', branch='master')
+    version('0.1.0', sha256='6e19b96ca51c6877042532fe187f0b5bf77577ff197cca4e002ddda1144205c3')
 
     depends_on('cmake', type='build')
     depends_on('cppkafka')
