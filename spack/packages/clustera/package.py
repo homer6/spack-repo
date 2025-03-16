@@ -53,11 +53,11 @@ class Clustera(CMakePackage):
         """Verify that test binary was installed correctly."""
         if self.spec.satisfies('+tests'):
             import os
-            from spack.util import tty
+            import spack.tty
             test_bin = os.path.join(self.prefix.bin, 'clustera_tests')
             if not os.path.isfile(test_bin):
-                tty.warn(f"Test binary not found: {test_bin}")
+                spack.tty.warn(f"Test binary not found: {test_bin}")
             else:
-                tty.msg(f"Test binary installed successfully: {test_bin}")
+                spack.tty.msg(f"Test binary installed successfully: {test_bin}")
 
     license = 'MIT'
